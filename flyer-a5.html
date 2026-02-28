@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback-Flyer A5 – Allianz Agentur Vogelsberger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A5 portrait;
+      margin: 0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 148mm;
+      height: 210mm;
+      font-family: 'Inter', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #ffffff;
+      color: #111827;
+      overflow: hidden;
+    }
+
+    .flyer {
+      width: 148mm;
+      height: 210mm;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16mm 16mm 12mm;
+      position: relative;
+    }
+
+    /* Top accent line */
+    .flyer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32mm;
+      height: 0.7mm;
+      background: #003781;
+      border-radius: 0 0 1mm 1mm;
+    }
+
+    /* Logo area */
+    .flyer__top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5mm;
+      padding-top: 2mm;
+    }
+
+    .flyer__logo {
+      display: flex;
+      align-items: center;
+      gap: 2.5mm;
+    }
+
+    .flyer__logo-mark {
+      width: 7mm;
+      height: auto;
+    }
+
+    .flyer__logo-text {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #003781;
+      letter-spacing: 0.06em;
+    }
+
+    .flyer__headline {
+      font-size: 22pt;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.025em;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .flyer__subline {
+      font-size: 9pt;
+      font-weight: 400;
+      color: #6b7280;
+      text-align: center;
+      line-height: 1.5;
+      max-width: 100mm;
+    }
+
+    /* QR section */
+    .flyer__qr {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6mm;
+    }
+
+    .flyer__qr img {
+      width: 68mm;
+      height: 68mm;
+      display: block;
+    }
+
+    .flyer__cta {
+      font-size: 10.5pt;
+      font-weight: 600;
+      color: #003781;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+
+    .flyer__time {
+      font-size: 8pt;
+      font-weight: 400;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    /* Footer */
+    .flyer__footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5mm;
+      padding-top: 4mm;
+      border-top: 0.3px solid #e5e7eb;
+      width: 100%;
+    }
+
+    .flyer__agency {
+      font-size: 8pt;
+      font-weight: 600;
+      color: #003781;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    .flyer__name {
+      font-size: 7pt;
+      font-weight: 400;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    .flyer__contact {
+      font-size: 7pt;
+      font-weight: 400;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    @media print {
+      html, body { width: 148mm; height: 210mm; }
+    }
+
+    @media screen {
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #e5e5e5;
+        width: auto;
+        height: auto;
+      }
+      .flyer {
+        box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+        border-radius: 2mm;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="flyer">
+
+    <!-- Top -->
+    <div class="flyer__top">
+      <div class="flyer__logo">
+        <svg class="flyer__logo-mark" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 10 L20 3 L36 10 L36 28 C36 37 20 46 20 46 C20 46 4 37 4 28Z" fill="#003781"/>
+          <path d="M20 14 L14 23 L18.5 23 L16 32 L27 21 L22.5 21 L25 14Z" fill="white"/>
+        </svg>
+        <span class="flyer__logo-text">ALLIANZ</span>
+      </div>
+
+      <h1 class="flyer__headline">Ihre Meinung<br>zählt</h1>
+      <p class="flyer__subline">Helfen Sie uns, unseren Service<br>weiter zu verbessern.</p>
+    </div>
+
+    <!-- QR -->
+    <div class="flyer__qr">
+      <img src="qr/qr.svg" alt="QR-Code scannen">
+      <span class="flyer__cta">Jetzt scannen und Feedback geben</span>
+      <span class="flyer__time">Dauert nur 10 Sekunden</span>
+    </div>
+
+    <!-- Footer -->
+    <div class="flyer__footer">
+      <span class="flyer__agency">Allianz Agentur</span>
+      <span class="flyer__name">Manfred Vogelsberger · Matrei am Brenner</span>
+      <span class="flyer__contact">05273 200 88 · agentur.vogelsberger@allianz.at</span>
+    </div>
+
+  </div>
+</body>
+</html>
