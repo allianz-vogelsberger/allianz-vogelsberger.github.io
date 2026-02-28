@@ -77,7 +77,9 @@ function showPanel(panel) {
 function updateStars(value, isHover) {
   stars.forEach((star) => {
     const v = parseInt(star.dataset.value);
-    star.classList.toggle("active", !isHover && v <= selectedRating);
+    if (!isHover) {
+      star.classList.toggle("active", v <= selectedRating);
+    }
     star.classList.toggle("hovered", isHover && v <= value);
     star.setAttribute("aria-checked", v === selectedRating ? "true" : "false");
   });
