@@ -3,7 +3,7 @@
 Mobile-first Feedback-Seite für die **Allianz Agentur Manfred Vogelsberger** in Matrei am Brenner.  
 Kunden scannen einen QR-Code und können in 10 Sekunden eine Bewertung abgeben.
 
-**Live:** [https://blitzerbotapp.github.io/allianz-matrei-review-qr/](https://blitzerbotapp.github.io/allianz-matrei-review-qr/)
+**Live:** [https://allianz-vogelsberger.github.io](https://allianz-vogelsberger.github.io)
 
 ---
 
@@ -117,7 +117,7 @@ Falls sich die URL ändert (z.B. nach Custom Domain), QR-Code mit Python neu erz
 pip3 install 'qrcode[pil]'
 python3 -c "
 import qrcode, qrcode.image.svg
-URL = 'https://feedback-allianz-vogelsberger.at'
+URL = 'https://allianz-vogelsberger.github.io'
 factory = qrcode.image.svg.SvgPathImage
 qrcode.make(URL, image_factory=factory, box_size=20, border=4, error_correction=qrcode.constants.ERROR_CORRECT_H).save('qr/qr.svg')
 qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H, box_size=40, border=4)
@@ -190,7 +190,7 @@ Erstelle einen **CNAME-Record**:
 
 ```
 Typ      Name       Wert                           TTL
-CNAME    feedback   blitzerbotapp.github.io.       3600
+CNAME    feedback   allianz-vogelsberger.github.io.       3600
 ```
 
 ### Schritt 3: GitHub Pages konfigurieren
