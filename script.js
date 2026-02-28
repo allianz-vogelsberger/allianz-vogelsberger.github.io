@@ -1,5 +1,10 @@
 /* ── Configuration ───────────────────────────────────── */
-const FORMSPREE_ENDPOINT = "HIER_PLATZHALTER";
+
+// FormSubmit.co – sends feedback directly to this email (no signup needed).
+// First submission triggers a confirmation email – click the link to activate.
+// Change to Formspree URL (https://formspree.io/f/xxxxx) or any JSON endpoint.
+const FORMSPREE_ENDPOINT = "https://formsubmit.co/ajax/lorenz@hygienemanagement.at";
+
 const GOOGLE_REVIEW_URL = "HIER_PLATZHALTER";
 
 /* ── DOM ─────────────────────────────────────────────── */
@@ -47,6 +52,7 @@ function showPanel(panel) {
       requestAnimationFrame(() => {
         panel.classList.remove("entering");
         panel.classList.add("visible");
+        panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
     });
   }
@@ -61,13 +67,23 @@ function updateStars(value, isHover) {
   });
 }
 
+function hapticFeedback() {
+  if (navigator.vibrate) navigator.vibrate(10);
+}
+
 /* ── Star Events ─────────────────────────────────────── */
-stars.forEach((star) => {
+stars.forEach((star, index) => {
   star.addEventListener("click", () => {
     selectedRating = parseInt(star.dataset.value);
     feedbackRating.value = selectedRating;
     updateStars(selectedRating, false);
     hint.textContent = hintTexts[selectedRating] || "";
+    hint.style.color = "";
+    hapticFeedback();
+
+    star.classList.remove("just-selected");
+    void star.offsetWidth;
+    star.classList.add("just-selected");
 
     if (selectedRating >= 4) {
       showPanel(panelPositive);
@@ -85,14 +101,11 @@ stars.forEach((star) => {
   star.addEventListener("mouseleave", () => {
     updateStars(0, true);
     hint.textContent = selectedRating ? hintTexts[selectedRating] : "";
-
-    stars.forEach((s) => {
-      s.classList.remove("hovered");
-    });
+    stars.forEach((s) => s.classList.remove("hovered"));
   });
 });
 
-/* Keyboard navigation */
+/* Keyboard navigation for star group */
 document.querySelector(".stars").addEventListener("keydown", (e) => {
   const current = document.activeElement;
   const idx = Array.from(stars).indexOf(current);
@@ -122,7 +135,6 @@ function initForm() {
   if (!isConfigured(FORMSPREE_ENDPOINT)) {
     btnSubmit.disabled = true;
     endpointNotice.hidden = false;
-    return;
   }
 }
 

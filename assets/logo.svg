@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40">
-  <!-- Placeholder: Replace with official logo if permitted -->
-  <text x="0" y="28" font-family="Inter, -apple-system, sans-serif" font-weight="700" font-size="16" fill="#003781">ALLIANZ AGENTUR</text>
-  <text x="0" y="38" font-family="Inter, -apple-system, sans-serif" font-weight="400" font-size="8" fill="#6b7280">Vogelsberger · Matrei am Brenner</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" fill="none">
+  <!-- Shield mark -->
+  <path d="M4 8 L20 2 L36 8 L36 26 C36 34 20 42 20 42 C20 42 4 34 4 26Z" fill="#003781"/>
+  <path d="M20 12 L14 20 L18 20 L16 28 L26 18 L22 18 L24 12Z" fill="white"/>
+  <!-- Text -->
+  <text x="46" y="22" font-family="Inter, -apple-system, sans-serif" font-weight="700" font-size="17" fill="#003781" letter-spacing="0.04em">ALLIANZ</text>
+  <text x="130" y="22" font-family="Inter, -apple-system, sans-serif" font-weight="400" font-size="17" fill="#003781">Agentur</text>
+  <text x="46" y="38" font-family="Inter, -apple-system, sans-serif" font-weight="500" font-size="12" fill="#6b7280" letter-spacing="0.02em">Manfred Vogelsberger · Matrei am Brenner</text>
 </svg>
