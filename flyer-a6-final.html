@@ -36,14 +36,12 @@
       position: relative;
     }
 
-    .page::after {
-      content: '';
+    .topbar {
       position: absolute;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 20mm;
-      height: 0.6mm;
+      left: 0;
+      right: 0;
+      height: 4mm;
       background: #003781;
     }
 
@@ -54,19 +52,28 @@
 
     .header__agency {
       font-size: 7.5pt;
-      font-weight: 700;
+      font-weight: 600;
       color: #003781;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       display: block;
     }
 
-    .header__agent {
+    .header__name {
       font-size: 6pt;
       font-weight: 400;
       color: #888;
       display: block;
       margin-top: 1mm;
+      letter-spacing: 0.02em;
+    }
+
+    .header__location {
+      font-size: 6pt;
+      font-weight: 400;
+      color: #888;
+      display: block;
+      margin-top: 0.3mm;
       letter-spacing: 0.02em;
     }
 
@@ -103,7 +110,7 @@
 
     .cta {
       font-size: 8.5pt;
-      font-weight: 700;
+      font-weight: 600;
       color: #003781;
       text-align: center;
       letter-spacing: 0.02em;
@@ -163,14 +170,16 @@
 <body>
   <button class="print-btn" onclick="window.print()">PDF drucken</button>
   <div class="page">
+    <div class="topbar"></div>
     <div class="header">
-      <span class="header__agency">Allianz Agentur</span>
-      <span class="header__agent">Manfred Vogelsberger · Matrei am Brenner</span>
+      <span class="header__agency">ALLIANZ AGENTUR</span>
+      <span class="header__name">Manfred Vogelsberger</span>
+      <span class="header__location">Matrei am Brenner</span>
     </div>
     <h1 class="headline">Ihre Meinung zählt.</h1>
     <p class="subline">Scannen Sie den QR-Code und geben Sie Feedback.</p>
     <div class="qr"><img src="qr/qr.svg" alt="QR-Code"></div>
-    <span class="cta">Jetzt scannen und bewerten</span>
+    <span class="cta">QR-Code scannen und Feedback geben</span>
     <span class="micro">Dauert nur 10 Sekunden</span>
     <div class="footer">
       <span class="footer__line">05273 200 88</span>
