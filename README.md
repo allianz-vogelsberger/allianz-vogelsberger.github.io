@@ -73,14 +73,24 @@ Siehe Abschnitt [Custom Domain Setup](#custom-domain-setup) weiter unten.
 ├── index.html          # Haupt-HTML (Single Page)
 ├── styles.css          # Alle Styles (mobile-first)
 ├── script.js           # Logik + Konfiguration (3 Variablen oben)
-├── flyer.html          # Druckfertiger A4-Flyer mit QR-Code
-├── CNAME               # Custom Domain für GitHub Pages
+├── datenschutz.html    # DSGVO-konforme Datenschutzerklärung
+├── impressum.html      # Impressum (§ 5 ECG)
+├── legal.css           # Styles für Rechtstexte + Footer-Links
+├── flyer-a6-v2.html    # ✅ Tischkarte A6 (105×148mm) – Empfohlen
+├── flyer-a5-v2.html    # ✅ Flyer A5 (148×210mm)
+├── flyer-tent-a6-v2.html # ✅ Tischaufsteller/Zelt (A4, 2× A6 + Falz)
+├── flyer-card.html     # (v1, deprecated)
+├── flyer-a5.html       # (v1, deprecated)
 ├── assets/
 │   ├── favicon.svg     # Favicon
-│   └── logo.svg        # Logo-Platzhalter (austauschbar)
+│   ├── logo.svg        # Logo-Platzhalter (Website)
+│   └── allianz-logo.svg # ← Offizielles Allianz-Logo hier ablegen
 ├── qr/
 │   ├── qr.svg          # QR-Code für Druck (Vektor)
-│   └── qr.png          # QR-Code 1024×1024px
+│   ├── qr.png          # QR-Code 1024×1024px
+│   ├── flyer-a6-v2.png # Druckfertig A6 (300 DPI)
+│   ├── flyer-a5-v2.png # Druckfertig A5 (300 DPI)
+│   └── flyer-tent-a6-v2.png # Druckfertig Tent (300 DPI)
 ├── .gitignore
 └── README.md
 ```
@@ -104,10 +114,33 @@ Die QR-Codes liegen im Ordner `qr/`:
 - Farbe: Allianz-Blau (#003781) auf Weiß
 - Error Correction Level: H (30 % – funktioniert auch bei leichter Beschädigung)
 
-### Druckfertiger Flyer
+### Druckfertige Flyer (v2 – empfohlen)
 
-`flyer.html` im Browser öffnen → Cmd+P (Mac) / Strg+P (Windows) → Drucken.  
-A4 Hochformat, professionelles Design mit QR-Code, Allianz-Branding und Kontaktdaten.
+| Datei | Format | Verwendung |
+|-------|--------|------------|
+| `flyer-a6-v2.html` | A6 (105×148mm) | **Empfohlen** – Tischkarte für Schreibtisch/Theke |
+| `flyer-a5-v2.html` | A5 (148×210mm) | Größerer Flyer für Wartebereich |
+| `flyer-tent-a6-v2.html` | A4 → A6 Zelt | Tischaufsteller (falten, steht von selbst) |
+
+#### Druckanleitung
+
+1. HTML-Datei im Browser öffnen (Chrome empfohlen)
+2. Oben rechts „Als PDF drucken" klicken, oder Cmd+P / Strg+P
+3. **Wichtige Einstellungen:**
+   - Skalierung: **100 %** (nicht „An Seite anpassen")
+   - Ränder: **Keine**
+   - Hintergrundgrafiken: **An** ✓
+4. Als PDF speichern oder direkt drucken
+
+> **Tischaufsteller:** Auf A4 drucken → an der gestrichelten Linie in der Mitte falten → steht als Zelt auf dem Tisch.
+
+#### Offizielles Logo einbinden
+
+Aktuell werden die Flyer im text-only Modus gedruckt (kein Fake-Logo).  
+Sobald das **offizielle Allianz-Logo** als SVG/PNG vorliegt:
+
+1. Datei als `assets/allianz-logo.svg` ins Repo legen
+2. In den Flyer-HTMLs ist der Logo-Slot bereits vorbereitet
 
 ### QR-Code neu generieren
 

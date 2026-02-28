@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tischaufsteller A6 – Allianz Agentur Vogelsberger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4 portrait; margin: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 210mm;
+      height: 297mm;
+      font-family: 'Inter', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #fff;
+      color: #111827;
+      overflow: hidden;
+    }
+
+    .sheet {
+      width: 210mm;
+      height: 297mm;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* ── Fold line ── */
+    .fold {
+      width: 100%;
+      height: 0;
+      border-top: 0.5pt dashed #d1d5db;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .fold::after {
+      content: '✂ hier falten';
+      position: absolute;
+      top: -5pt;
+      right: 8mm;
+      font-size: 6pt;
+      color: #d1d5db;
+      background: #fff;
+      padding: 0 3mm;
+    }
+
+    /* ── Panel (each A6 half) ── */
+    .panel {
+      width: 210mm;
+      height: 148.5mm;
+      display: flex;
+      flex-direction: column;
+      padding: 12mm 20mm;
+      position: relative;
+    }
+
+    .panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1mm;
+      background: #003781;
+    }
+
+    /* The back panel is upside-down so when folded it reads correctly */
+    .panel--back {
+      transform: rotate(180deg);
+    }
+
+    .panel--back::before {
+      top: auto;
+      bottom: 0;
+      top: 0;
+    }
+
+    /* ── Header ── */
+    .header {
+      margin-bottom: auto;
+    }
+
+    .header__agency {
+      font-size: 8pt;
+      font-weight: 700;
+      color: #003781;
+      letter-spacing: 0.04em;
+      display: block;
+    }
+
+    .header__agent {
+      font-size: 6.5pt;
+      font-weight: 400;
+      color: #6b7280;
+      display: block;
+      margin-top: 0.5mm;
+    }
+
+    /* ── Content (Front) ── */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 5mm;
+    }
+
+    .headline {
+      font-size: 22pt;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .subline {
+      font-size: 8pt;
+      font-weight: 400;
+      color: #6b7280;
+      line-height: 1.5;
+      max-width: 130mm;
+    }
+
+    .qr {
+      width: 70mm;
+      height: 70mm;
+    }
+
+    .qr img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .cta {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #003781;
+    }
+
+    .micro {
+      font-size: 6pt;
+      font-weight: 400;
+      color: #9ca3af;
+    }
+
+    /* ── Content (Back) ── */
+    .back-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 8mm;
+    }
+
+    .back-content__thanks {
+      font-size: 20pt;
+      font-weight: 700;
+      color: #003781;
+      letter-spacing: -0.02em;
+    }
+
+    .back-content__text {
+      font-size: 8.5pt;
+      font-weight: 400;
+      color: #6b7280;
+      line-height: 1.55;
+      max-width: 130mm;
+    }
+
+    .back-content__hours {
+      font-size: 7.5pt;
+      font-weight: 400;
+      color: #374151;
+      line-height: 1.65;
+    }
+
+    .back-content__hours strong {
+      font-weight: 600;
+      display: block;
+      font-size: 7pt;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #003781;
+      margin-bottom: 1.5mm;
+    }
+
+    /* ── Footer ── */
+    .foot {
+      margin-top: auto;
+      text-align: center;
+      padding-top: 4mm;
+      border-top: 0.25pt solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8mm;
+    }
+
+    .foot__contact {
+      font-size: 6.5pt;
+      font-weight: 500;
+      color: #374151;
+    }
+
+    .foot__address {
+      font-size: 6pt;
+      font-weight: 400;
+      color: #9ca3af;
+    }
+
+    /* Print button */
+    .print-btn {
+      position: fixed;
+      top: 16px; right: 16px;
+      background: #003781;
+      color: #fff;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 100;
+      transition: background 200ms;
+    }
+    .print-btn:hover { background: #00265a; }
+
+    @media print {
+      html, body { width: 210mm; height: 297mm; }
+      .print-btn { display: none; }
+    }
+
+    @media screen {
+      body {
+        display: flex; justify-content: center; align-items: center;
+        min-height: 100vh; background: #f0f0f0;
+        width: auto; height: auto;
+      }
+      .sheet {
+        box-shadow: 0 2px 32px rgba(0,0,0,0.1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-btn" onclick="window.print()">Als PDF drucken</button>
+
+  <div class="sheet">
+
+    <!-- ═══ FRONT (top half) ═══ -->
+    <div class="panel panel--front">
+      <div class="header">
+        <span class="header__agency">Allianz Agentur</span>
+        <span class="header__agent">Manfred Vogelsberger · Matrei am Brenner</span>
+      </div>
+
+      <div class="content">
+        <h1 class="headline">Ihre Meinung zählt.</h1>
+        <p class="subline">Scannen Sie den QR-Code und bewerten Sie Ihren Besuch.</p>
+
+        <div class="qr">
+          <img src="qr/qr.svg" alt="QR-Code scannen für Feedback">
+        </div>
+
+        <span class="cta">Jetzt scannen &amp; bewerten</span>
+        <span class="micro">Dauert nur 10 Sekunden</span>
+      </div>
+
+      <div class="foot">
+        <span class="foot__contact">05273 200 88 · agentur.vogelsberger@allianz.at</span>
+      </div>
+    </div>
+
+    <!-- ═══ FOLD LINE ═══ -->
+    <div class="fold"></div>
+
+    <!-- ═══ BACK (bottom half, rotated 180°) ═══ -->
+    <div class="panel panel--back">
+      <div class="header">
+        <span class="header__agency">Allianz Agentur</span>
+        <span class="header__agent">Manfred Vogelsberger</span>
+      </div>
+
+      <div class="back-content">
+        <span class="back-content__thanks">Vielen Dank!</span>
+        <p class="back-content__text">Ihr Feedback hilft uns, unseren Service<br>stetig zu verbessern.</p>
+
+        <div class="back-content__hours">
+          <strong>Öffnungszeiten</strong>
+          Mo – Do: 08:00 – 13:00 &amp; 14:00 – 17:00<br>
+          Fr: 08:00 – 13:00<br>
+          Nachmittags nach tel. Vereinbarung
+        </div>
+      </div>
+
+      <div class="foot">
+        <span class="foot__contact">05273 200 88 · agentur.vogelsberger@allianz.at</span>
+        <span class="foot__address">Bergstein 25A, 6143 Matrei am Brenner</span>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
