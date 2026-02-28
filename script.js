@@ -10,7 +10,7 @@ const FEEDBACK_EMAIL = "lorenz@hygienemanagement.at";
 // Google Place ID for the agency. Find it at:
 // https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder
 // Leave as "" to disable the Google Review button.
-const GOOGLE_PLACE_ID = "";
+const GOOGLE_PLACE_ID = "ChIJZyzTabVcnUcRcuwdF4j4OPE";
 
 /* ══════════════════════════════════════════════════════
    Derived endpoints (do not edit)
@@ -160,10 +160,12 @@ feedbackForm.addEventListener("submit", async (e) => {
   if (!isConfigured(FORMSPREE_ENDPOINT)) return;
 
   const message = document.getElementById("feedback-message").value.trim();
-  if (!message) {
-    document.getElementById("feedback-message").focus();
-    return;
-  }
+  const name = document.getElementById("feedback-name").value.trim();
+  const email = document.getElementById("feedback-email").value.trim();
+
+  if (!message) { document.getElementById("feedback-message").focus(); return; }
+  if (!name) { document.getElementById("feedback-name").focus(); return; }
+  if (!email) { document.getElementById("feedback-email").focus(); return; }
 
   btnSubmit.disabled = true;
   btnSubmit.innerHTML = '<span class="spinner"></span> Senden …';

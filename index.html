@@ -66,12 +66,12 @@
           </div>
           <div class="form__row">
             <div class="form__group">
-              <label for="feedback-name" class="form__label">Name <span class="form__optional">(optional)</span></label>
-              <input type="text" id="feedback-name" name="name" class="form__input" placeholder="Max Mustermann">
+              <label for="feedback-name" class="form__label">Name <span class="form__required">*</span></label>
+              <input type="text" id="feedback-name" name="name" class="form__input" placeholder="Max Mustermann" required>
             </div>
             <div class="form__group">
-              <label for="feedback-email" class="form__label">E-Mail <span class="form__optional">(optional)</span></label>
-              <input type="email" id="feedback-email" name="email" class="form__input" placeholder="max@beispiel.at">
+              <label for="feedback-email" class="form__label">E-Mail <span class="form__required">*</span></label>
+              <input type="email" id="feedback-email" name="email" class="form__input" placeholder="max@beispiel.at" required>
             </div>
           </div>
           <input type="hidden" name="rating" id="feedback-rating" value="">
@@ -104,7 +104,7 @@
         </div>
         <h2 class="panel__title">Danke für dein Feedback!</h2>
         <p class="panel__text">Wir nehmen dein Feedback ernst und arbeiten stetig daran, unseren Service zu verbessern.</p>
-        <p class="panel__text panel__text--small">Wir melden uns, falls du Kontaktdaten angegeben hast.</p>
+        <p class="panel__text panel__text--small">Wir melden uns bei dir.</p>
       </div>
     </section>
 
