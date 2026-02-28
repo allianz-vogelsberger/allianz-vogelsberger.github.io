@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="legal.css">
 </head>
 <body>
   <main id="app">
@@ -77,6 +78,7 @@
           <input type="hidden" name="rating" id="feedback-rating" value="">
           <input type="hidden" name="_subject" value="Neues Feedback – Allianz Agentur Vogelsberger">
           <button type="submit" class="btn btn--primary" id="btn-submit">Feedback senden</button>
+          <p class="form__consent">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Daten gemäß <a href="datenschutz.html">Datenschutzerklärung</a> zu.</p>
           <p id="endpoint-notice" class="form__notice" hidden>Feedback-Endpoint noch nicht konfiguriert.</p>
         </form>
       </div>
@@ -166,9 +168,14 @@
       </div>
     </section>
 
-    <!-- DSGVO Footer -->
+    <!-- Footer -->
     <footer class="footer" role="contentinfo">
       <p class="footer__text">Feedback wird ausschließlich zur Qualitätsverbesserung verwendet. Keine Weitergabe an Dritte.</p>
+      <nav class="footer__links" aria-label="Rechtliche Seiten">
+        <a href="impressum.html">Impressum</a>
+        <span class="footer__sep" aria-hidden="true">|</span>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
       <p class="footer__copy">&copy; <span id="year"></span> Allianz Agentur Vogelsberger</p>
     </footer>
 
