@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Feedback für die Allianz Agentur Vogelsberger in Matrei am Brenner – Bewertung in 10 Sekunden.">
+  <meta name="theme-color" content="#003781">
+  <title>Feedback – Allianz Agentur Vogelsberger | Matrei am Brenner</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero__logo-slot">
+        <img src="assets/logo.svg" alt="Allianz Agentur Vogelsberger" class="hero__logo" onerror="this.style.display='none'">
+      </div>
+      <h1 id="hero-heading" class="hero__title">
+        Danke für deinen Besuch bei der<br>
+        <span class="hero__title--highlight">Allianz Agentur Matrei am Brenner</span>
+      </h1>
+      <p class="hero__subtitle">Manfred Vogelsberger</p>
+      <p class="hero__text">Wie zufrieden warst du mit deinem Termin?<br>Dauert nur <strong>10 Sekunden</strong>.</p>
+    </section>
+
+    <!-- Star Rating -->
+    <section class="rating-card" aria-label="Bewertung abgeben">
+      <div class="stars" role="radiogroup" aria-label="Sternebewertung von 1 bis 5">
+        <button class="star" data-value="1" role="radio" aria-checked="false" aria-label="1 Stern" tabindex="0">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="star" data-value="2" role="radio" aria-checked="false" aria-label="2 Sterne" tabindex="-1">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="star" data-value="3" role="radio" aria-checked="false" aria-label="3 Sterne" tabindex="-1">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="star" data-value="4" role="radio" aria-checked="false" aria-label="4 Sterne" tabindex="-1">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="star" data-value="5" role="radio" aria-checked="false" aria-label="5 Sterne" tabindex="-1">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <p class="rating-card__hint" aria-live="polite"></p>
+    </section>
+
+    <!-- Conditional Panels -->
+    <section id="panel-feedback" class="panel panel--feedback" aria-label="Feedback-Formular" hidden>
+      <div class="panel__inner">
+        <h2 class="panel__title">Was können wir besser machen?</h2>
+        <p class="panel__text">Dein Feedback hilft uns, unseren Service zu verbessern.</p>
+        <form id="feedback-form" class="form" novalidate>
+          <div class="form__group">
+            <label for="feedback-message" class="form__label">Deine Nachricht <span class="form__required">*</span></label>
+            <textarea id="feedback-message" name="message" class="form__textarea" rows="4" required placeholder="Was hat dir nicht gefallen? Was können wir verbessern?"></textarea>
+          </div>
+          <div class="form__row">
+            <div class="form__group">
+              <label for="feedback-name" class="form__label">Name <span class="form__optional">(optional)</span></label>
+              <input type="text" id="feedback-name" name="name" class="form__input" placeholder="Max Mustermann">
+            </div>
+            <div class="form__group">
+              <label for="feedback-email" class="form__label">E-Mail <span class="form__optional">(optional)</span></label>
+              <input type="email" id="feedback-email" name="email" class="form__input" placeholder="max@beispiel.at">
+            </div>
+          </div>
+          <input type="hidden" name="rating" id="feedback-rating" value="">
+          <button type="submit" class="btn btn--primary" id="btn-submit">Feedback senden</button>
+          <p id="endpoint-notice" class="form__notice" hidden>Feedback-Endpoint noch nicht konfiguriert.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="panel-positive" class="panel panel--positive" aria-label="Positive Bewertung" hidden>
+      <div class="panel__inner">
+        <div class="panel__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" stroke="#003781" stroke-width="2"/><path d="M15 26c0 0 3.5 6 9 6s9-6 9-6" stroke="#003781" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="20" r="1.5" fill="#003781"/><circle cx="31" cy="20" r="1.5" fill="#003781"/></svg>
+        </div>
+        <h2 class="panel__title">Vielen Dank!</h2>
+        <p class="panel__text">Das freut uns sehr. Magst du uns kurz eine Bewertung auf Google dalassen?</p>
+        <a href="#" id="btn-google" class="btn btn--primary btn--google" target="_blank" rel="noopener noreferrer">
+          <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google Bewertung schreiben
+        </a>
+        <p id="google-notice" class="form__notice" hidden>Google-Review-Link noch nicht konfiguriert.</p>
+      </div>
+    </section>
+
+    <section id="panel-thankyou" class="panel panel--thankyou" aria-label="Danke" hidden>
+      <div class="panel__inner">
+        <div class="panel__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" stroke="#003781" stroke-width="2"/><path d="M16 24l5 5 11-11" stroke="#003781" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h2 class="panel__title">Danke für dein Feedback!</h2>
+        <p class="panel__text">Wir nehmen dein Feedback ernst und arbeiten stetig daran, unseren Service zu verbessern.</p>
+        <p class="panel__text panel__text--small">Wir melden uns, falls du Kontaktdaten angegeben hast.</p>
+      </div>
+    </section>
+
+    <!-- Trust -->
+    <section class="trust" aria-label="Vertrauenshinweis">
+      <p class="trust__text">Wir nehmen dein Feedback ernst – jede Rückmeldung hilft uns, besser zu werden.</p>
+    </section>
+
+    <!-- Contact Card -->
+    <section class="contact" aria-label="Kontaktdaten">
+      <h2 class="contact__title">Kontakt</h2>
+      <div class="contact__card">
+        <div class="contact__item">
+          <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <div>
+            <span class="contact__label">Telefon</span>
+            <a href="tel:+43527320088" class="contact__value">05273 200 88</a>
+          </div>
+        </div>
+        <div class="contact__item">
+          <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div>
+            <span class="contact__label">E-Mail</span>
+            <a href="mailto:agentur.vogelsberger@allianz.at" class="contact__value">agentur.vogelsberger@allianz.at</a>
+          </div>
+        </div>
+        <div class="contact__item">
+          <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <span class="contact__label">Adresse</span>
+            <span class="contact__value">Bergstein 25A, 6143 Matrei am Brenner</span>
+          </div>
+        </div>
+        <div class="contact__item">
+          <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div>
+            <span class="contact__label">Öffnungszeiten</span>
+            <span class="contact__value">Mo – Do: 09:00 – 12:00 &amp; 13:30 – 17:30<br>Fr: 09:00 – 12:00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DSGVO Footer -->
+    <footer class="footer" role="contentinfo">
+      <p class="footer__text">Feedback wird ausschließlich zur Qualitätsverbesserung verwendet. Keine Weitergabe an Dritte.</p>
+      <p class="footer__copy">&copy; <span id="year"></span> Allianz Agentur Vogelsberger</p>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
