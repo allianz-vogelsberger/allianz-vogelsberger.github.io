@@ -1,11 +1,27 @@
-/* ── Configuration ───────────────────────────────────── */
+/* ══════════════════════════════════════════════════════
+   CONFIGURATION — Only change these three values
+   ══════════════════════════════════════════════════════ */
 
-// FormSubmit.co – sends feedback directly to this email (no signup needed).
-// First submission triggers a confirmation email – click the link to activate.
-// Change to Formspree URL (https://formspree.io/f/xxxxx) or any JSON endpoint.
-const FORMSPREE_ENDPOINT = "https://formsubmit.co/ajax/lorenz@hygienemanagement.at";
+// Email that receives feedback submissions via FormSubmit.co.
+// Currently set to internal test address. For production, change to:
+// "agentur.vogelsberger@allianz.at"
+const FEEDBACK_EMAIL = "lorenz@hygienemanagement.at";
 
-const GOOGLE_REVIEW_URL = "HIER_PLATZHALTER";
+// Google Place ID for the agency. Find it at:
+// https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder
+// Leave as "" to disable the Google Review button.
+const GOOGLE_PLACE_ID = "";
+
+/* ══════════════════════════════════════════════════════
+   Derived endpoints (do not edit)
+   ══════════════════════════════════════════════════════ */
+const FORMSPREE_ENDPOINT = FEEDBACK_EMAIL
+  ? "https://formsubmit.co/ajax/" + FEEDBACK_EMAIL
+  : "";
+
+const GOOGLE_REVIEW_URL = GOOGLE_PLACE_ID
+  ? "https://search.google.com/local/writereview?placeid=" + GOOGLE_PLACE_ID
+  : "";
 
 /* ── DOM ─────────────────────────────────────────────── */
 const stars = document.querySelectorAll(".star");
@@ -34,7 +50,7 @@ const hintTexts = {
 };
 
 function isConfigured(value) {
-  return value && value !== "HIER_PLATZHALTER" && value.trim().length > 0;
+  return Boolean(value && value.trim().length > 0);
 }
 
 function showPanel(panel) {
@@ -72,7 +88,7 @@ function hapticFeedback() {
 }
 
 /* ── Star Events ─────────────────────────────────────── */
-stars.forEach((star, index) => {
+stars.forEach((star) => {
   star.addEventListener("click", () => {
     selectedRating = parseInt(star.dataset.value);
     feedbackRating.value = selectedRating;

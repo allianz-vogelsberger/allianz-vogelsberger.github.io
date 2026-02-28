@@ -9,10 +9,10 @@ Kunden scannen einen QR-Code und können in 10 Sekunden eine Bewertung abgeben.
 
 ## Funktionsweise
 
-| Sterne  | Aktion                                                   |
-|---------|----------------------------------------------------------|
-| 1 – 3   | Inline-Feedback-Formular → Daten gehen an Formspree     |
-| 4 – 5   | Danke-Screen + Button → öffnet Google Bewertung          |
+| Sterne | Aktion |
+|--------|--------|
+| 1 – 3  | Inline-Feedback-Formular → Daten werden per E-Mail zugestellt (FormSubmit.co) |
+| 4 – 5  | Danke-Screen + Button → öffnet Google Bewertung in neuem Tab |
 
 Kein Backend nötig. Die Seite läuft komplett als Static Site über GitHub Pages.
 
@@ -20,30 +20,49 @@ Kein Backend nötig. Die Seite läuft komplett als Static Site über GitHub Page
 
 ## Konfiguration
 
-Öffne `script.js` und setze die beiden Variablen ganz oben:
+Alle Einstellungen befinden sich in **`script.js`**, ganz oben im Abschnitt `CONFIGURATION`.  
+Es gibt nur **3 Variablen**, die gesetzt werden müssen:
+
+### 1. `FEEDBACK_EMAIL`
+
+E-Mail-Adresse, an die Feedback-Formulare gesendet werden (via FormSubmit.co).
 
 ```js
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/DEINE_ID";
-const GOOGLE_REVIEW_URL  = "https://search.google.com/local/writereview?placeid=DEINE_PLACE_ID";
+const FEEDBACK_EMAIL = "agentur.vogelsberger@allianz.at";
 ```
 
-### Formspree einrichten
+**Aktueller Stand (Test):** `lorenz@hygienemanagement.at`  
+**Für Production:** Auf `agentur.vogelsberger@allianz.at` ändern.
 
-1. Gehe zu [formspree.io](https://formspree.io) und erstelle ein kostenloses Konto
-2. Erstelle ein neues Formular
-3. Kopiere die Endpoint-URL (z.B. `https://formspree.io/f/xwkgabcd`)
-4. Setze sie als `FORMSPREE_ENDPOINT` in `script.js`
+> Beim **allerersten Submit** sendet FormSubmit.co eine Bestätigungs-E-Mail an die Adresse. Dort den Link klicken – danach kommen alle Feedbacks automatisch.
+>
+> Wenn `FEEDBACK_EMAIL` leer ist (`""`), wird der Submit-Button deaktiviert und ein Hinweis angezeigt.
 
-### Google Review Link finden
+### 2. `GOOGLE_PLACE_ID`
 
-1. Suche deine Agentur auf [Google Maps](https://maps.google.com)
-2. Öffne den Eintrag → Klick auf "Rezension schreiben"
-3. Kopiere die URL aus der Browser-Adresszeile
-4. Alternativ: Nutze die [Place ID Finder](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder) und baue die URL:  
-   `https://search.google.com/local/writereview?placeid=DEINE_PLACE_ID`
-5. Setze sie als `GOOGLE_REVIEW_URL` in `script.js`
+Google Place ID der Agentur. Wird automatisch zur Review-URL zusammengebaut.
 
-> Solange die Variablen auf `"HIER_PLATZHALTER"` stehen, werden die jeweiligen Buttons automatisch deaktiviert und ein Hinweis angezeigt.
+```js
+const GOOGLE_PLACE_ID = "ChIJ...deine_place_id...";
+```
+
+**So findest du die Place ID:**
+
+1. Öffne den [Google Place ID Finder](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder)
+2. Suche nach „Allianz Agentur Vogelsberger Matrei am Brenner"
+3. Kopiere die angezeigte Place ID (beginnt mit `ChIJ...`)
+4. Trage sie in `script.js` ein
+
+Alternativ:
+1. Öffne [Google Maps](https://maps.google.com)
+2. Suche die Agentur → Klick auf „Rezension schreiben"
+3. In der URL steht die Place ID nach `placeid=`
+
+> Wenn `GOOGLE_PLACE_ID` leer ist (`""`), wird der Google-Review-Button deaktiviert und ein Hinweis angezeigt.
+
+### 3. Custom Domain
+
+Siehe Abschnitt [Custom Domain Setup](#custom-domain-setup) weiter unten.
 
 ---
 
@@ -51,9 +70,11 @@ const GOOGLE_REVIEW_URL  = "https://search.google.com/local/writereview?placeid=
 
 ```
 /
-├── index.html          # Haupt-HTML
+├── index.html          # Haupt-HTML (Single Page)
 ├── styles.css          # Alle Styles (mobile-first)
-├── script.js           # Logik + Konfiguration
+├── script.js           # Logik + Konfiguration (3 Variablen oben)
+├── flyer.html          # Druckfertiger A4-Flyer mit QR-Code
+├── CNAME               # Custom Domain für GitHub Pages
 ├── assets/
 │   ├── favicon.svg     # Favicon
 │   └── logo.svg        # Logo-Platzhalter (austauschbar)
@@ -70,10 +91,10 @@ const GOOGLE_REVIEW_URL  = "https://search.google.com/local/writereview?placeid=
 
 Die QR-Codes liegen im Ordner `qr/`:
 
-| Datei       | Format | Verwendung                              |
-|-------------|--------|-----------------------------------------|
-| `qr.svg`    | SVG    | Für Druck (skaliert verlustfrei)        |
-| `qr.png`    | PNG    | Für digitale Verwendung (1024×1024px)   |
+| Datei    | Format | Verwendung |
+|----------|--------|------------|
+| `qr.svg` | SVG   | Für Druck (skaliert verlustfrei) |
+| `qr.png` | PNG   | Für digitale Verwendung (1024×1024px) |
 
 ### Drucktipps
 
@@ -83,15 +104,20 @@ Die QR-Codes liegen im Ordner `qr/`:
 - Farbe: Allianz-Blau (#003781) auf Weiß
 - Error Correction Level: H (30 % – funktioniert auch bei leichter Beschädigung)
 
+### Druckfertiger Flyer
+
+`flyer.html` im Browser öffnen → Cmd+P (Mac) / Strg+P (Windows) → Drucken.  
+A4 Hochformat, professionelles Design mit QR-Code, Allianz-Branding und Kontaktdaten.
+
 ### QR-Code neu generieren
 
-Falls sich die URL ändert, kann der QR-Code mit Python neu erzeugt werden:
+Falls sich die URL ändert (z.B. nach Custom Domain), QR-Code mit Python neu erzeugen:
 
 ```bash
 pip3 install 'qrcode[pil]'
 python3 -c "
 import qrcode, qrcode.image.svg
-URL = 'DEINE_NEUE_URL'
+URL = 'https://feedback-allianz-vogelsberger.at'
 factory = qrcode.image.svg.SvgPathImage
 qrcode.make(URL, image_factory=factory, box_size=20, border=4, error_correction=qrcode.constants.ERROR_CORRECT_H).save('qr/qr.svg')
 qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H, box_size=40, border=4)
@@ -108,7 +134,6 @@ Die Seite wird automatisch über **GitHub Pages** deployt.
 
 - **Branch:** `main`
 - **Pfad:** `/` (Root)
-- **URL:** [https://blitzerbotapp.github.io/allianz-matrei-review-qr/](https://blitzerbotapp.github.io/allianz-matrei-review-qr/)
 
 Änderungen einfach committen und pushen – GitHub Pages baut automatisch neu.
 
@@ -118,34 +143,109 @@ git add -A && git commit -m "Update" && git push
 
 ---
 
-## Custom Domain (optional)
+## Custom Domain Setup
 
-Falls du eine eigene Domain verwenden möchtest (z.B. `feedback.vogelsberger-allianz.at`):
+### Schritt 1: Domain kaufen
 
-1. Erstelle eine `CNAME`-Datei im Root mit dem Domain-Namen:
-   ```
-   feedback.vogelsberger-allianz.at
-   ```
+Empfohlene Domains (`.at` für Österreich):
 
-2. Setze bei deinem DNS-Provider einen **CNAME-Record**:
-   ```
-   feedback  →  blitzerbotapp.github.io
-   ```
+| Domain | Empfehlung |
+|--------|-----------|
+| `feedback-allianz-vogelsberger.at` | Top-Empfehlung |
+| `vogelsberger-feedback.at` | Kurz & klar |
+| `allianz-vogelsberger-feedback.at` | Alternativ |
+| `agentur-vogelsberger-feedback.at` | Alternativ |
 
-3. Warte auf DNS-Propagation (bis zu 24h)
+Kosten: ca. **5–15 €/Jahr**
 
-4. In den GitHub Repo-Settings unter *Pages* die Custom Domain eintragen und HTTPS aktivieren
+Empfohlene Registrare:
 
-5. QR-Code mit neuer URL neu generieren (siehe oben)
+| Anbieter | URL |
+|----------|-----|
+| **Porkbun** | [porkbun.com](https://porkbun.com) – günstig, einfach |
+| **Namecheap** | [namecheap.com](https://namecheap.com) – etabliert |
+| **Hetzner** | [hetzner.com](https://www.hetzner.com/domainregistration) – DE/AT Anbieter |
+| **IONOS** | [ionos.at](https://www.ionos.at) – AT Anbieter |
+| **World4You** | [world4you.com](https://www.world4you.com) – AT Anbieter |
+
+### Schritt 2: DNS konfigurieren
+
+Im DNS-Management des Registrars folgende Records anlegen:
+
+**Option A – Root-Domain** (z.B. `feedback-allianz-vogelsberger.at`):
+
+Erstelle **4 A-Records** und einen **AAAA-Record**:
+
+```
+Typ    Name    Wert                     TTL
+A      @       185.199.108.153          3600
+A      @       185.199.109.153          3600
+A      @       185.199.110.153          3600
+A      @       185.199.111.153          3600
+```
+
+**Option B – Subdomain** (z.B. `feedback.vogelsberger.at`):
+
+Erstelle einen **CNAME-Record**:
+
+```
+Typ      Name       Wert                           TTL
+CNAME    feedback   blitzerbotapp.github.io.       3600
+```
+
+### Schritt 3: GitHub Pages konfigurieren
+
+1. Gehe zu **Repository Settings** → **Pages**
+2. Unter „Custom domain": Domain eintragen (z.B. `feedback-allianz-vogelsberger.at`)
+3. Warte bis DNS-Check grün wird (kann bis zu 24h dauern, meist Minuten)
+4. Haken bei **„Enforce HTTPS"** setzen
+
+### Schritt 4: CNAME-Datei aktualisieren
+
+Die `CNAME`-Datei im Repo muss die Domain enthalten. Aktuell steht dort:
+
+```
+feedback-allianz-vogelsberger.at
+```
+
+Falls du eine andere Domain wählst, passe die Datei an.
+
+### Schritt 5: QR-Code aktualisieren
+
+Nach Domain-Wechsel den QR-Code mit der neuen URL neu generieren (siehe [QR-Code neu generieren](#qr-code-neu-generieren)).
+
+### Schritt 6: Verifizierung
+
+- Öffne `https://feedback-allianz-vogelsberger.at` im Browser
+- Prüfe ob HTTPS-Schloss angezeigt wird
+- Teste den QR-Code mit dem Handy
+
+---
+
+## Öffnungszeiten
+
+| Tag | Zeiten |
+|-----|--------|
+| Montag – Donnerstag | 08:00 – 13:00 & 14:00 – 17:00 |
+| Freitag | 08:00 – 13:00 |
+| Nachmittags | nach telefonischer Vereinbarung |
+
+---
+
+## Kontakt
+
+- **Telefon:** 05273 200 88
+- **E-Mail:** agentur.vogelsberger@allianz.at
+- **Adresse:** Bergstein 25A, 6143 Matrei am Brenner
 
 ---
 
 ## Tech-Stack
 
-- Plain HTML / CSS / JS (kein Framework)
+- Plain HTML / CSS / JS (kein Framework, kein Build-Step)
 - Inter Font (Google Fonts)
-- Formspree (Feedback-Empfang, kostenlos)
-- GitHub Pages (Hosting)
+- FormSubmit.co (Feedback-Empfang, kein Account nötig)
+- GitHub Pages (Hosting, kostenlos)
 
 ---
 
