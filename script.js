@@ -3,9 +3,7 @@
    ══════════════════════════════════════════════════════ */
 
 // Email that receives feedback submissions via FormSubmit.co.
-// Currently set to internal test address. For production, change to:
-// "agentur.vogelsberger@allianz.at"
-const FEEDBACK_EMAIL = "lorenz@hygienemanagement.at";
+const FEEDBACK_EMAIL = "agentur.vogelsberger@allianz.at";
 
 // Google Place ID for the agency. Find it at:
 // https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder

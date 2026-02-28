@@ -31,9 +31,6 @@ E-Mail-Adresse, an die Feedback-Formulare gesendet werden (via FormSubmit.co).
 const FEEDBACK_EMAIL = "agentur.vogelsberger@allianz.at";
 ```
 
-**Aktueller Stand (Test):** `lorenz@hygienemanagement.at`  
-**Für Production:** Auf `agentur.vogelsberger@allianz.at` ändern.
-
 > Beim **allerersten Submit** sendet FormSubmit.co eine Bestätigungs-E-Mail an die Adresse. Dort den Link klicken – danach kommen alle Feedbacks automatisch.
 >
 > Wenn `FEEDBACK_EMAIL` leer ist (`""`), wird der Submit-Button deaktiviert und ein Hinweis angezeigt.
